@@ -1,0 +1,77 @@
+{% extends 'parent/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'style/order.css' %}">
+{% endblock %}
+{% block title %} ثبت سفارش {% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="user-order">
+            <h2 class="user-order-title">سفارش شما</h2>
+            <table id="keywords" cellspacing="0" cellpadding="0" dir="rtl">
+                <thead>
+                    <tr>
+                    <th><span>ردیف</span></th>
+                    <th><span>نام محصول</span></th>
+                    <th><span>تعداد</span></th>
+                    <th><span>قیمت (تومان)</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for item in cart %}
+                    <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{ item.product.name }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.price | intcomma }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="user-info">
+            <h2 class="user-info-title">اطلاعات شخصی </h2>
+            <form action="#" method="post">
+                {% csrf_token %}
+                <div class="info-wrapper">
+                    <div class="input-wrapper">
+                        <label for="first_name">نام:</label>
+                        <input type="text" id="first_name" name="first_name" maxlength="255" required>
+                    </div>
+                    <div class="input-wrapper">
+                        <label for="last_name">نام خانوادگی:</label>
+                        <input type="text" id="last_name" name="last_name" maxlength="255" required>
+                    </div>
+                </div>
+                <div class="info-wrapper">
+                    <div class="input-wrapper">
+                        <label for="postal_code">کد پستی:</label>
+                        <input type="text" id="postal_code" name="postal_code" maxlength="11" required>
+                    </div>
+                    <div class="input-wrapper">
+                        <label for="phone">تلفن همراه:</label>
+                        <input type="text" id="phone" name="phone" maxlength="255" required>
+                    </div>
+                </div>
+                <div class="info-wrapper">
+                    <div class="input-wrapper">
+                        <label for="province">استان :</label>
+                        <input type="text" id="province" name="province" maxlength="11" required>
+                    </div>
+                    <div class="input-wrapper">
+                        <label for="city">شهر :</label>
+                        <input type="text" id="city" name="city" maxlength="255" required>
+                    </div>
+                </div>
+                <div class="info-wrapper">
+                    <div class="input-wrapper">
+                        <label for="address">آدرس:</label>
+                        <textarea name="address" id="address" rows="3" cols="10"></textarea>
+                    </div>
+                </div>
+                <button class="submit-btn" type="submit">ثبت اطلاعات</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

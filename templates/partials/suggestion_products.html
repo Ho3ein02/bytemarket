@@ -1,0 +1,36 @@
+{% load humanize %}
+<div class="product-list">
+    <div class="swiper seggestion_swiper">
+        <div class="swiper-wrapper">
+            {% for product in products %}
+            <div class="swiper-slide">
+                <div class="product">
+                <a href="{% url 'shop:product_detail' product.id product.slug %}">
+                    <img class="product-image" src="{{ product.images.first.image_file.url }}" alt="product">
+                </a>
+                <a href="{% url 'shop:product_detail' product.id product.slug %}">
+                    <p class="product-caption">{{ product.name }}</p>
+                </a>
+                <div class="product-price">
+                    <span class="price off"> {{ product.price | intcomma }} تومان</span>
+                    <span class="price-off">{{ product.new_price | intcomma }} تومان</span>
+                </div>
+                <span class="off-percent">%{{ product.off_percent }}</span>
+                <div class="product-separator"></div>
+            </div>
+            </div>
+            {% endfor %}
+        </div>
+      </div>
+    <div class="previous-btn swiper-button-prev-custom">
+        <svg viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+        </svg>
+    </div>
+
+    <div class="next-btn swiper-button-next-custom">
+        <svg viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M11.78 5.22a.75.75 0 0 1 0 1.06L8.06 10l3.72 3.72a.75.75 0 1 1-1.06 1.06l-4.25-4.25a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 0Z" clip-rule="evenodd" />
+        </svg>
+    </div>
+</div>

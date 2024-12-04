@@ -1,0 +1,258 @@
+{% extends 'parent/base.html' %}
+{% load static %}
+{% load shop_tags %}
+{% block title %}  بایت مارکت {% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+{% endblock %}
+
+{% block body %}
+<main>
+    <div class="container">
+        <!-- banner section -->
+        <section class="banner-section">
+            <div class="swiper banner_swiper">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                    <div class="banner">
+                        <img src="{% static 'images/banners/banner1.png' %}" alt="laptop banner" class="banner_img">
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="banner">
+                        <img src="{% static 'images/banners/banner2.png' %}" alt="laptop banner" class="banner_img">
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="banner">
+                        <img src="{% static 'images/banners/banner3.png' %}" alt="laptop banner" class="banner_img">
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
+              </div>
+        </section>
+
+        <!-- suggestion section -->
+        <section class="suggestion-products">
+            <div class="suggestion-header">
+                <span class="separate-line"></span>
+                <span class="suggestion-title">پیشنهاد شگفت انگیز</span>
+                <span class="separate-line"></span>
+            </div>
+            {% suggestion_products %}
+        </section>
+
+        <!-- best seller section -->
+        <section class="main-section">
+            <div class="section-header">
+                <div class="title-wrapper">
+                    <span class="right-line"></span>
+                    <span class="section-title">پرفروش ترین ها</span>
+                </div>
+                <a href="#" class="show-all">مشاهده همه</a>
+            </div>
+            <div class="product-list">
+                <div class="swiper best_seller_swiper">
+                    <div class="swiper-wrapper">
+                      <div class="swiper-slide">
+                        <div class="product">
+                            <a href="#">
+                                <img class="product-image" src="../images/products/small_product-TLP-61760_fa9d7864-ed30-4ed3-84c6-3ff43dd26939.jpg" alt="product">
+                            </a>
+                            <a href="#">
+                                <p class="product-caption">لپ تاپ 16 اینچی ایسوس مدل ASUS ROG Zephyrus GU605MV-QR177 Core Ultra7-32GB-1TSSD-8GB</p>
+                            </a>
+                            <div class="product-price">
+                                <span class="price off"> 121,999,000 تومان</span>
+                                <span class="price-off">120,000,000 تومان</span>
+                            </div>
+                            <span class="off-percent">%14</span>
+                            <div class="product-separator"></div>
+                        </div>
+                      </div>
+                      <div class="swiper-slide">
+                        <div class="product">
+                            <a href="#">
+                                <img class="product-image" src="../images/products/small_product-TLP-61760_fa9d7864-ed30-4ed3-84c6-3ff43dd26939.jpg" alt="product">
+                            </a>
+                            <a href="#">
+                                <p class="product-caption">لپ تاپ 16 اینچی ایسوس مدل ASUS ROG Zephyrus GU605MV-QR177 Core Ultra7-32GB-1TSSD-8GB</p>
+                            </a>
+                            <div class="product-price">
+                                <span class="price off"> 121,999,000 تومان</span>
+                                <span class="price-off">120,000,000 تومان</span>
+                            </div>
+                            <span class="off-percent">%14</span>
+                            <div class="product-separator"></div>
+                        </div>
+                      </div>
+                      <div class="swiper-slide">
+                        <div class="product">
+                            <a href="#">
+                                <img class="product-image" src="../images/products/small_product-TLP-61760_fa9d7864-ed30-4ed3-84c6-3ff43dd26939.jpg" alt="product">
+                            </a>
+                            <a href="#">
+                                <p class="product-caption">لپ تاپ 16 اینچی ایسوس مدل ASUS ROG Zephyrus GU605MV-QR177 Core Ultra7-32GB-1TSSD-8GB</p>
+                            </a>
+                            <div class="product-price">
+                                <span class="price off"> 121,999,000 تومان</span>
+                                <span class="price-off">120,000,000 تومان</span>
+                            </div>
+                            <span class="off-percent">%14</span>
+                            <div class="product-separator"></div>
+                        </div>
+                      </div>
+                      <div class="swiper-slide">
+                        <div class="product">
+                            <a href="#">
+                                <img class="product-image" src="../images/products/small_product-TLP-61760_fa9d7864-ed30-4ed3-84c6-3ff43dd26939.jpg" alt="product">
+                            </a>
+                            <a href="#">
+                                <p class="product-caption">لپ تاپ 16 اینچی ایسوس مدل ASUS ROG Zephyrus GU605MV-QR177 Core Ultra7-32GB-1TSSD-8GB</p>
+                            </a>
+                            <div class="product-price">
+                                <span class="price off"> 121,999,000 تومان</span>
+                                <span class="price-off">120,000,000 تومان</span>
+                            </div>
+                            <span class="off-percent">%14</span>
+                            <div class="product-separator"></div>
+                        </div>
+                      </div>
+                      <div class="swiper-slide">
+                        <div class="product">
+                            <a href="#">
+                                <img class="product-image" src="../images/products/small_product-TLP-61760_fa9d7864-ed30-4ed3-84c6-3ff43dd26939.jpg" alt="product">
+                            </a>
+                            <a href="#">
+                                <p class="product-caption">لپ تاپ 16 اینچی ایسوس مدل ASUS ROG Zephyrus GU605MV-QR177 Core Ultra7-32GB-1TSSD-8GB</p>
+                            </a>
+                            <div class="product-price">
+                                <span class="price off"> 121,999,000 تومان</span>
+                                <span class="price-off">120,000,000 تومان</span>
+                            </div>
+                            <span class="off-percent">%14</span>
+                            <div class="product-separator"></div>
+                        </div>
+                      </div>
+                      <div class="swiper-slide">
+                        <div class="product">
+                            <a href="#">
+                                <img class="product-image" src="../images/products/small_product-TLP-61760_fa9d7864-ed30-4ed3-84c6-3ff43dd26939.jpg" alt="product">
+                            </a>
+                            <a href="#">
+                                <p class="product-caption">لپ تاپ 16 اینچی ایسوس مدل ASUS ROG Zephyrus GU605MV-QR177 Core Ultra7-32GB-1TSSD-8GB</p>
+                            </a>
+                            <div class="product-price">
+                                <span class="price off"> 121,999,000 تومان</span>
+                                <span class="price-off">120,000,000 تومان</span>
+                            </div>
+                            <span class="off-percent">%14</span>
+                            <div class="product-separator"></div>
+                        </div>
+                      </div>
+                      <div class="swiper-slide">
+                        <div class="product">
+                            <a href="#">
+                                <img class="product-image" src="../images/products/small_product-TLP-61760_fa9d7864-ed30-4ed3-84c6-3ff43dd26939.jpg" alt="product">
+                            </a>
+                            <a href="#">
+                                <p class="product-caption">لپ تاپ 16 اینچی ایسوس مدل ASUS ROG Zephyrus GU605MV-QR177 Core Ultra7-32GB-1TSSD-8GB</p>
+                            </a>
+                            <div class="product-price">
+                                <span class="price off"> 121,999,000 تومان</span>
+                                <span class="price-off">120,000,000 تومان</span>
+                            </div>
+                            <span class="off-percent">%14</span>
+                            <div class="product-separator"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <div class="previous-btn swiper-button-prev-best-seller">
+                    <svg viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+                    </svg>
+                </div>
+
+                <div class="next-btn swiper-button-next-best-seller">
+                    <svg viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M11.78 5.22a.75.75 0 0 1 0 1.06L8.06 10l3.72 3.72a.75.75 0 1 1-1.06 1.06l-4.25-4.25a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 0Z" clip-rule="evenodd" />
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- newest section -->
+        <section class="main-section">
+            <div class="section-header">
+                <div class="title-wrapper">
+                    <span class="right-line"></span>
+                    <span class="section-title">جدیدترین محصولات</span>
+                </div>
+                <a href="#" class="show-all">مشاهده همه</a>
+            </div>
+            {% latest_products %}
+        </section>
+    </div>
+</main>
+
+<script type="module">
+    import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs'
+
+    var swiper = new Swiper(".banner_swiper", {
+    spaceBetween: 30,
+    centeredSlides: true,
+    autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+    },
+    pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+    },
+    navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+    },
+    });
+    var seggustion_swiper = new Swiper(".seggestion_swiper", {
+    slidesPerView: 5,
+    spaceBetween: 30,
+    pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+    },
+    navigation: {
+        nextEl: ".swiper-button-next-custom",
+        prevEl: ".swiper-button-prev-custom",
+    },
+    });
+    var best_seller_swiper = new Swiper(".best_seller_swiper", {
+    slidesPerView: 5,
+    spaceBetween: 30,
+    pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+    },
+    navigation: {
+        nextEl: ".swiper-button-next-best-seller",
+        prevEl: ".swiper-button-prev-best-seller",
+    },
+    });
+    var newest_seller = new Swiper(".newest_swiper", {
+    slidesPerView: 5,
+    spaceBetween: 30,
+    pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+    },
+    navigation: {
+        nextEl: ".swiper-button-next-newest",
+        prevEl: ".swiper-button-prev-newest",
+    },
+    });
+</script>
+{% endblock %}

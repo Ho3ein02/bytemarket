@@ -1,0 +1,68 @@
+{% extends 'parent/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block title %}  Product name {% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'style/detail.css' %}">
+{% endblock %}
+{% block body %}
+    <!-- historical navbar -->
+     <div class="container">
+        <div class="product-detail">
+            <div class="wrapper detail">
+                <div class="detail-image">
+                    <img src="{{ product.images.first.image_file.url }}" alt="product">
+                </div>
+                <div class="product-wrapper">
+                    <h1 class="product-detail-name">{{ product.name }}</h1>
+                    <div class="features">
+                        <p class="features-title">ویژگی های محصول</p>
+                        <ul>
+                            {% for feature in product.features.all %}
+                            <li> {{ feature.name }}  {{ feature.value }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="product-info">
+                <div class="product-inventory">
+                    <p class="inventory"> موجودی : {{ product.inventory }} </p>
+                </div>
+                <div class="product-price">
+                    <p>قیمت محصول</p>
+                    {% if product.off_percent != 0 %}
+                    <p class="price off">{{ product.price | intcomma }} تومان</p>
+                    <p class="off-price">{{ product.new_price | intcomma }} تومان</p>
+                    {% else %}
+                    <p class="price">{{ product.price | intcomma }} تومان</p>
+                    {% endif %}
+                </div>
+                <div class="add-cart">
+                    <button class="add-cart-btn">افزودن به سبد خرید</button>
+                </div>
+            </div>
+        </div>
+        <div class="wrapper">
+            <h2 class="description-title">توضیحات</h2>
+            <p class="decription">{{ product.description }}</p>
+        </div>
+     </div>
+
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+     <script>
+        $(document).ready(function() {
+            $(".add-cart-btn").click(function(){
+                $.ajax({
+                    type: "POST",
+                    url: "{% url 'cart:update_cart' %}",
+                    data: {'csrfmiddlewaretoken': '{{ csrf_token }}', 'action': 'add', 'product_id': {{ product.id }}, },
+                    success: function(data) {
+                        $(".cart-total-price").text(data.cart_total_price + " تومان ");
+                        $(".cart-total-count").text(data.cart_count);
+                    }
+                });
+            });
+        });
+     </script>
+{% endblock %}
