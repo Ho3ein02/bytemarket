@@ -92,8 +92,6 @@ DATABASES = {
         'NAME': 'bytemarket',
         'USER': 'hossein',
         'PASSWORD': '12345678',
-        'HOST': 'localhost',
-        'PORT': '5432',
     }
 }
 
