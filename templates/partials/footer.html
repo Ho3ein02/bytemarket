@@ -38,7 +38,7 @@
             <div class="categories">
                 <p class="categories-title">دسته بندی ها</p>
                 <ul>
-                    {% for category in categories %}
+                    {% for category in header_categories %}
                     <li><a href="{% url 'shop:products_list' category.slug %}">{{ category.name }}</a></li>
                     {% endfor %}
                 </ul>
