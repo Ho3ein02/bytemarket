@@ -89,9 +89,10 @@ WSGI_APPLICATION = 'bytemarket.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'bytemarket',
-        'USER': 'hossein',
-        'PASSWORD': '12345678',
+        'NAME': 'bytemarket-database',
+        'USER': 'root',
+        'PASSWORD': 'imXJtN8ZMZvo9TAl8poiW22s',
+        'PORT': '5432',
     }
 }
 
