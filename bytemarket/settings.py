@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-n*-d+0eg17kjt4w2ip51^vwwr0qsw6%6$#6c7w=zbh((whtf2y
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['bytemarket.liara.run', 'www.bytemarket.liara.run']
 
 
 # Application definition
