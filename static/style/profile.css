@@ -1,0 +1,100 @@
+@import url('base.css');
+
+.wrapper {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 10px 14px;
+}
+
+.user {
+    margin: 25px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 20px;
+}
+
+.phone {
+    font-size: 20px;
+    font-family: 'shabnam-bold';
+}
+
+.user-info {
+    margin-top: 25px;
+}
+
+.user-info-title {
+    margin-bottom: 25px;
+}
+
+.user-info {
+    list-style: none;
+    margin-right: 20px;
+}
+
+.user-info li {
+    margin-bottom: 20px;
+}
+
+.form-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px 320px;
+}
+
+.input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+}
+
+.user-info-detail form input {
+    width: 240px;
+    outline: none;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px 12px;
+}
+
+.user-info-detail form label {
+    font-size: 14px;
+    color: #8a8a8a;
+}
+
+.error {
+    font-size: 12px;
+    color: var(--attention-color);
+}
+
+
+.logout-btn,
+.edit {
+    width: 125px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    background-color: var(--attention-color);
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    padding: 8px 0;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.edit {
+    background-color: var(--primary-color);
+    margin-top: 45px;
+}
+
+.orders {
+    margin-top: 55px;
+    margin-bottom: 20px;
+}
+
+.orders-table th,
+.orders-table td{
+    padding: 10px 30px;
+}

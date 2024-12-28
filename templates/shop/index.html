@@ -1,0 +1,130 @@
+{% extends 'parent/base.html' %}
+{% load static %}
+{% load shop_tags %}
+{% block title %}  بایت مارکت {% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+{% endblock %}
+
+{% block body %}
+<main>
+    <div class="container">
+        <!-- banner section -->
+        <section class="banner-section">
+            <div class="swiper banner_swiper">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                    <div class="banner">
+                        <img src="{% static 'images/banners/banner1.png' %}" alt="laptop banner" class="banner_img">
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="banner">
+                        <img src="{% static 'images/banners/banner2.png' %}" alt="laptop banner" class="banner_img">
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="banner">
+                        <img src="{% static 'images/banners/banner3.png' %}" alt="laptop banner" class="banner_img">
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+              </div>
+        </section>
+
+        <!-- suggestion section -->
+        <section class="suggestion-products">
+            <div class="suggestion-header">
+                <span class="separate-line"></span>
+                <span class="suggestion-title">پیشنهاد شگفت انگیز</span>
+                <span class="separate-line"></span>
+                <a href="{% url 'shop:products_portion' 'suggestion' %}" class="show-all">مشاهده همه</a>
+            </div>
+            {% suggestion_products %}
+        </section>
+
+        <!-- best seller section -->
+        <section class="main-section">
+            <div class="section-header">
+                <div class="title-wrapper">
+                    <span class="right-line"></span>
+                    <span class="section-title">پرفروش ترین ها</span>
+                </div>
+                <a href="{% url 'shop:products_portion' 'best_seller' %}" class="show-all">مشاهده همه</a>
+            </div>
+            {% best_seller_products %}
+        </section>
+
+        <!-- newest section -->
+        <section class="main-section">
+            <div class="section-header">
+                <div class="title-wrapper">
+                    <span class="right-line"></span>
+                    <span class="section-title">جدیدترین محصولات</span>
+                </div>
+                <a href="{% url 'shop:products_portion' 'newest' %}" class="show-all">مشاهده همه</a>
+            </div>
+            {% latest_products %}
+        </section>
+    </div>
+</main>
+
+<script type="module">
+    import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs'
+
+    var swiper = new Swiper(".banner_swiper", {
+    spaceBetween: 30,
+    centeredSlides: true,
+    autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+    },
+    pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+    },
+    navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+    },
+    });
+    var seggustion_swiper = new Swiper(".seggestion_swiper", {
+    slidesPerView: 5,
+    spaceBetween: 30,
+    pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+    },
+    navigation: {
+        nextEl: ".swiper-button-next-custom",
+        prevEl: ".swiper-button-prev-custom",
+    },
+    });
+    var best_seller_swiper = new Swiper(".best_seller_swiper", {
+    slidesPerView: 5,
+    spaceBetween: 30,
+    pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+    },
+    navigation: {
+        nextEl: ".swiper-button-next-best-seller",
+        prevEl: ".swiper-button-prev-best-seller",
+    },
+    });
+    var newest_seller = new Swiper(".newest_swiper", {
+    slidesPerView: 5,
+    spaceBetween: 30,
+    pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+    },
+    navigation: {
+        nextEl: ".swiper-button-next-newest",
+        prevEl: ".swiper-button-prev-newest",
+    },
+    });
+</script>
+{% endblock %}

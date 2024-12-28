@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style/login.css' %}">
+    <title>ورود / ثبت نام | Byte Market</title>
+</head>
+<body>
+    <div class="container">
+        <div class="login">
+            <p class="store-name">بایت مارکت</p>
+            <h1 class="title">ورود | ثبت نام</h1>
+            <form class="login-form" method="post">
+                <input type="hidden" name="next" value="{{ next }}">
+                {% csrf_token %}
+                <input type="text" name="phone" id="phone" placeholder="شماره تلفن همراه" maxlength="11">
+                {% for error in form.phone.errors %}
+                    <span class="input-error">{{ error }}</span>
+                {% endfor %}
+                <input class="submit-btn" type="submit" value="ادامه">
+            </form>
+        </div>
+        <div class="login-image">
+            <img src="{% static 'images/login/istockphoto-1192339276-170667a_LE_auto_x4.jpg' %}" alt="shopping cart">
+        </div>
+    </div>
+
+<script>
+document.getElementById('phone').addEventListener('keypress', function(event) {
+    const char = String.fromCharCode(event.which);
+    // Allow only digits and a single decimal point
+    if (!/[\d.]/.test(char)) {
+        event.preventDefault();
+    }
+});
+
+</script>
+</body>
+</html>

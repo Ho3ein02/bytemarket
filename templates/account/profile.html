@@ -1,0 +1,60 @@
+{% extends 'parent/base.html' %}
+{% load static %}
+{% load humanize %}
+{% load jformat %}
+{% block title %} اطلاعات کاربری {% endblock %}
+{% block head %} 
+    <link rel="stylesheet" href="{% static 'style/profile.css' %}">
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="wrapper">
+            <div class="user">
+                <div class="phone">{{ user.phone }}</div>
+                <a href="{% url 'account:logout' %}" class="logout-btn">خروج از حساب</a>
+            </div>
+            <!-- info section -->
+            <section class="user-info">
+                <h3 class="user-info-title">اطلاعات کاربری</h3>
+                <div class="user-info-detail">
+                    <ul class="user-info">
+                        <li>نام : {{ user.first_name }}</li>
+                        <li>نام خانوادگی : {{ user.last_name }}</li>
+                        <li>شماره موبایل : {{ user.phone }}</li>
+                        <li>ایمیل : {{ user.email }}</li>
+                    </ul>
+
+                    <a href="{% url 'account:user_info_edit' %}" class="edit">ویرایش اطلاعات</a>
+                </div>
+            </section>
+
+            <!-- orders section -->
+            <section class="orders">
+                <h3 class="orders-title">سفارش ها</h3>
+                <table class="orders-table">
+                    <tr>
+                        <th>شماره سفارش</th>
+                        <th>تاریخ</th>
+                        <th>مجموع</th>
+                        <th>وضعیت</th>
+                        <th>جزئیات</th>
+                    </tr>
+                    {% for order in user.orders.all %}
+                        <tr>
+                            <td>{{ order.id }}</td>
+                            <td>{{ order.created | jformat:"%Y/%m/%d" }}</td>
+                            <td>{{ order.final_price | intcomma}} تومان</td>
+                            {% if order.is_paid %}
+                                <td>پرداخت شده</td>
+                            {% else %}
+                                <td>پرداخت نشده</td>
+                            {% endif %}
+                            <td><a href="{% url 'order:order_detail' order.id %}">مشاهده جزئیات</a></td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </section>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,33 @@
+@import url("./font.css");
+
+:root {
+    --text-color: #444655;
+    --primary-color: #007bff;
+    --attention-color: #f12e5e;
+    --secondary-color: #0061e0;
+    --success-color: #22c55e;
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'shabnam', sans-serif;
+    box-sizing: border-box;
+    line-height: 1.5;
+}
+
+body {
+    background-color: #f3f4f6;
+    margin: 0;
+    color: var(--text-color)
+}
+
+.container {
+    width: 100%;
+    padding-left: 25px;
+    padding-right: 25px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+

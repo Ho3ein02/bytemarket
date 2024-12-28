@@ -1,0 +1,41 @@
+{% extends 'parent/base.html' %}
+{% load static %}
+{% load humanize %}
+{% load jformat %}
+{% block title %} جزئیات سفارش {% endblock %}
+{% block head %} 
+    <link rel="stylesheet" href="{% static 'style/order.css' %}">
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="wrapper">
+
+            <!-- orders section -->
+            <section class="order-detail">
+                <div class="order-detail-header">
+                    <h3 class="orders-title">سفارش {{ order.id }}</h3>
+                    {% if order.is_paid %}
+                    <p class="order-status"> وضعیت : <span class="gr">پرداخت شده</span></p>
+                    {% else %}
+                    <p class="order-status"> وضعیت : <span class="re">پرداخت نشده</span> </p>
+                    {% endif %}
+                </div>
+                {% for item in order.items.all %}
+                <div class="product-item">
+                    <p class="row">{{ forloop.counter }}</p>
+                    <a href="{% url 'shop:product_detail' item.product.id item.product.slug %}"><img src="{{ item.product.images.first.image_file.url }}" alt="{{ item.product.category }}" class="product-item-image"></a>
+                    <div class="product-item-detail">
+                        <a href="{% url 'shop:product_detail' item.product.id item.product.slug %}" class="product-item-name">{{ item.product.name }}</a>
+                        <div class="detail-price">
+                            <p class="item-product-price">قیمت : {{ item.price }}</p>
+                            <p class="item-product-quantity">تعداد : {{ item.quantity }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </section>
+        </div>
+    </div>
+{% endblock %}

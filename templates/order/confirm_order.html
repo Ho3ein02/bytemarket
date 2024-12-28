@@ -1,0 +1,53 @@
+{% extends 'parent/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'style/order.css' %}">
+{% endblock %}
+{% block title %} تایید سفارش و پرداخت {% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="user-info">
+            <h2 class="user-info-title">اطلاعات شما </h2>
+            <p>نام : {{ order.first_name }}</p>
+            <p>نام خانوادگی : {{ order.last_name }}</p>
+            <p>شماره : {{ order.phone }}</p>
+            <p>آدرس : {{ order.address }}</p>
+            <p>کد پستی : {{ order.postal_code }}</p>
+            <p>استان  : {{ order.province }}</p>
+            <p>شهر  : {{ order.city }}</p>
+            <a class="change-info-btn" href="{% url 'order:order_edit' order.id %}">ویرایش اطلاعات</a>
+        </div>
+        <div class="user-order">
+            <h2 class="user-order-title">سفارش شما</h2>
+            <table id="keywords" cellspacing="0" cellpadding="0" dir="rtl">
+                <thead>
+                    <tr>
+                    <th><span>ردیف</span></th>
+                    <th><span>نام محصول</span></th>
+                    <th><span>تعداد</span></th>
+                    <th><span>قیمت (تومان)</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for item in cart %}
+                    <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{ item.product.name }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.price | intcomma }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <div class="result">
+            <p class="post-price">هزینه پست : {{ cart.post_price | intcomma }} تومان</p>
+            <p class="payment-price">مبلغ کل : {{ cart.final_total_price | intcomma }} تومان</p>
+            <div class="payment-btns">
+                <a href="#" class="payment-btn">پرداخت</a>
+            </div>
+        </div>
+        </div>
+
+    </div>
+{% endblock %}

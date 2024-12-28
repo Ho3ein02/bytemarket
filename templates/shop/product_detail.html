@@ -1,0 +1,194 @@
+{% extends 'parent/base.html' %}
+{% load static %}
+{% load humanize %}
+{% load jformat %}
+{% block title %}  Product name {% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'style/detail.css' %}">
+{% endblock %}
+{% block body %}
+    <!-- historical navbar -->
+     <div class="container">
+        <div class="product-detail">
+            <div class="wrapper detail">
+                <div class="detail-image">
+                    <img src="{{ product.images.first.image_file.url }}" alt="product">
+                </div>
+                <div class="product-wrapper">
+                    <h1 class="product-detail-name">{{ product.name }}</h1>
+                    <div class="features">
+                        <p class="features-title">ویژگی های محصول</p>
+                        <ul>
+                            {% for feature in product.features.all %}
+                            <li> {{ feature.name }}  {{ feature.value }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="product-info">
+                <div class="product-inventory">
+                    <p class="inventory"> موجودی : {{ product.inventory }} </p>
+                </div>
+                {% if product.inventory %}
+                <div class="product-price">
+                    <p>قیمت محصول</p>
+                    {% if product.off_percent != 0 %}
+                    <p class="price off">{{ product.price | intcomma }} تومان</p>
+                    <p class="off-price">{{ product.new_price | intcomma }} تومان</p>
+                    {% else %}
+                    <p class="price">{{ product.price | intcomma }} تومان</p>
+                    {% endif %}
+                </div>
+                <div class="add-cart">
+                    <button class="add-cart-btn">افزودن به سبد خرید</button>
+                </div>
+                {% else %}
+                <div class="product-price">
+                    ناموجود
+                </div>
+                <div class="add-cart">
+                    <button class="disactive">افزودن به سبد خرید</button>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="wrapper">
+            <h2 class="description-title">توضیحات</h2>
+            <p class="decription">{{ product.description }}</p>
+        </div>
+        <div class="wrapper">
+            <h2 class="comments-title">نظرات</h2>
+            <form method="post" class="comment-form">
+                {% csrf_token %}
+                <p class="new-comment">ایجاد نظر جدید</p>
+                <input type="hidden" name="parent" value="None" class="parent-input">
+                <textarea name="comment" class="comment-input" rows="10"></textarea>
+                <input type="submit" value="ثبت نظر" class="comment-submit-btn">
+            </form>
+            <div class="comments">
+                {% if comments %}
+                {% for comment in comments %}
+                <div class="comment" data-parent="{{comment.id}}">
+                    <div class="comment-header">
+                        {% if comment.user.has_full_name %}
+                        <div class="comment-user"> {{ comment.user.get_full_name }}  ( {{comment.created | jformat:"%Y/%m/%d" }} ) </div>
+                        {% else %}
+                        <div class="comment-user"> کاربر ناشناس ( {{comment.created | jformat:"%Y/%m/%d" }} ) </div>
+                        {% endif %}
+                        <p class="reply-btn">پاسخ</p>
+                    </div>
+                    <div class="comment-body" id="comment_{{comment.id}}">{{ comment.content }}</div>
+                    {% if comment.replies.all %}
+                    {% for reply in comment.replies.all %}
+                    {% if reply.active %}
+                    <div class="reply">
+                        <div class="comment-header">
+                            {% if reply.user.has_full_name %}
+                            <div class="comment-user"> {{ reply.user.get_full_name }} ( {{reply.created | jformat:"%Y/%m/%d" }} ) </div>
+                            {% else %}
+                            <div class="comment-user"> کاربر ناشناس ( {{reply.created | jformat:"%Y/%m/%d" }} ) </div>
+                            {% endif %}
+                        </div>
+                        <div class="comment-body">{{ reply.content }}</div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                    {% endif %}
+                </div>
+                {% endfor %}
+                {% else %}
+                <div class="comment-empty">
+                    هنوز هیچ نظری ثبت نشده است.
+                </div>
+                {% endif %}
+            </div>
+        </div>
+     </div>
+     <div class="modal">
+         <div class="success-modal">
+            <span class="close-btn">x</span>
+            <p class="message"></p>
+         </div>
+         <div class="unsuccess-modal">
+            <span class="close-btn">x</span>
+            <p class="message"></p>
+         </div>
+     </div>
+
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+     <script>
+
+        function sendFormAsAjax(event){
+            $(document).ready(function() {
+                let data = $(event.target).serialize()
+                $.ajax({
+                    type: 'POST',
+                    url: "{% url 'shop:add_comment' product.id %}",
+                    data: data,
+                    success: function(response) {
+                        let success = response.success;
+                        let message = response.message;
+                        if (success) {
+                            $('.success-modal .message').empty()
+                            $('.success-modal .message').text(message)
+                            $('.success-modal').css('display', 'block')
+                            $('.comment-input').val('')
+                        } else {
+                            $('.unsuccess-modal .message').empty()
+                            $('.unsuccess-modal .message').text(message)
+                            $('.unsuccess-modal').css('display', 'block')
+                        }
+                    }
+                })
+            })
+        }
+
+         function sendReplyForm(event){
+            event.preventDefault()
+            sendFormAsAjax(event)
+            event.target.style.display = 'none'
+         }
+
+        $(document).ready(function() {
+            $(".add-cart-btn").click(function(){
+                $.ajax({
+                    type: "POST",
+                    url: "{% url 'cart:update_cart' %}",
+                    data: {'csrfmiddlewaretoken': '{{ csrf_token }}', 'action': 'add', 'product_id': '{{ product.id }}' },
+                    success: function(data) {
+                        $(".cart-total-price").text(data.cart_total_price + " تومان ");
+                        $(".cart-total-count").text(data.cart_count);
+                    }
+                });
+            });
+            
+            $('.comment-form').on('submit', function(e) {
+                e.preventDefault()
+                sendFormAsAjax(e)
+            })
+        
+            $('.close-btn').click(function () {
+                $('.success-modal').css('display', 'none');
+                $('.unsuccess-modal').css('display', 'none');
+            })
+
+            $('.reply-btn').click(function() {
+                let parent_id = $(this).closest('.comment').data('parent')
+                let replyFrom = `<form method="post" class="comment-form" onsubmit="sendReplyForm(event)">
+                        {% csrf_token %}
+                        <p class="new-comment"> پاسخ به نظر </p>
+                        <input type="hidden" name="parent" value="${parent_id}" class="parent-input">
+                        <textarea name="comment" class="comment-input" rows="2"></textarea>
+                        <input type="submit" value="ثبت پاسخ" class="comment-submit-btn">
+                        <button class="comment-cancel-submit-btn">لغو پاسخ </button>
+                    </form>`
+                $(replyFrom).insertAfter('#comment_' + parent_id)
+            })
+
+            $('.comment-cancel-submit-btn').click(function() {
+                $(this).closest('comment-form').remove()
+            })
+        });
+     </script>
+{% endblock %}

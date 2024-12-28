@@ -1,0 +1,13 @@
+{% load shop_tags %}
+<div class="pagination">
+    {% if products.has_previous %}
+    <a href="?page={{ products.previous_page_number }}" class="pagination-prev-btn" onclick="paginationClickHandler(event)"> > </a>
+    {% endif %}
+    {% custom_get_elided_page_range products.paginator products.number as page_range %}
+    {% for page_number in page_range %}
+    <a href="?page={{ page_number }}" class="page-btn {% if products.number == page_number %} page-btn-active {% endif %}" onclick="paginationClickHandler(event)">{{ page_number }}</a>
+    {% endfor %}
+    {% if products.has_next %}
+    <a href="?page={{ products.next_page_number }}" class="pagination-next-btn" onclick="paginationClickHandler(event)"> < </a>
+    {% endif %}
+</div>

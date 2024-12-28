@@ -1,0 +1,124 @@
+{% extends 'parent/base.html' %}
+{% load static %}
+{% load humanize %}
+{% load order_tags %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'style/order.css' %}">
+{% endblock %}
+{% block title %} ثبت سفارش {% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="user-order">
+            <h2 class="user-order-title">سفارش شما</h2>
+            <table id="keywords" cellspacing="0" cellpadding="0" dir="rtl">
+                <thead>
+                    <tr>
+                    <th><span>ردیف</span></th>
+                    <th><span>نام محصول</span></th>
+                    <th><span>تعداد</span></th>
+                    <th><span>قیمت (تومان)</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for item in cart %}
+                    <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{ item.product.name }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.price | intcomma }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="user-info">
+            <h2 class="user-info-title">اطلاعات شخصی </h2>
+            <form action="#" method="post">
+                {% csrf_token %}
+                <div class="info-wrapper">
+                    <div class="input-wrapper">
+                        <label for="first_name">نام:</label>
+                        <input type="text" id="first_name" name="first_name" maxlength="255" required {% if form.first_name.value %} value="{{ form.first_name.value }}" {% endif %}>
+                        {% for error in form.first_name.errors %}
+                            <span class="input-error">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="input-wrapper">
+                        <label for="last_name">نام خانوادگی:</label>
+                        <input type="text" id="last_name" name="last_name" maxlength="255" required {% if form.last_name.value %} value="{{ form.last_name.value }}" {% endif %}>
+                        {% for error in form.last_name.errors %}
+                            <span class="input-error">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="info-wrapper">
+                    <div class="input-wrapper">
+                        <label for="postal_code">کد پستی:</label>
+                        <input type="text" id="postal_code" name="postal_code" maxlength="11" required {% if form.postal_code.value %} value="{{ form.postal_code.value }}" {% endif %}>
+                        {% for error in form.postal_code.errors %}
+                            <span class="input-error">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="input-wrapper">
+                        <label for="phone">تلفن همراه:</label>
+                        <input type="text" id="phone" name="phone" maxlength="11" required {% if form.phone.value %} value="{{ form.phone.value }}" {% endif %}>
+                        {% for error in form.phone.errors %}
+                            <span class="input-error">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="info-wrapper">
+                    <div class="input-wrapper">
+                        <label for="province">استان :</label>
+                        <select name="province" id="province" class="select">
+                            <option value="None">استان خود را انتخاب کنید:</option>
+                            {% for province in provinces %}
+                            <option value="{{province.name}}">{{province.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="input-wrapper">
+                        <label for="city">شهر :</label>
+                        <select name="city" id="city" class="select">
+                            <option value="None">شهر خود را انتخاب کنید.</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="info-wrapper">
+                    <div class="input-wrapper">
+                        <label for="address">آدرس:</label>
+                        {% nospaces %}
+                        <textarea name="address" id="address" rows="3" cols="10">
+                            {% if form.address.value %}
+                                {{ form.address.value }}
+                            {% endif %}
+                        </textarea>
+                        {% endnospaces %}
+                        {% for error in form.address.errors %}
+                            <span class="input-error">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                <button class="submit-btn" type="submit">ثبت اطلاعات</button>
+            </form>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        $(document).ready(function(){
+            $('#province').change(function(event){
+                let province = $(this).val()
+                $.ajax({
+                    type: 'GET',
+                    url: '{% url "order:get_cities" %}',
+                    data: {'province':province},
+                    dataType: 'html',
+                    success: function(response){
+                        $('#city').empty()
+                        $('#city').append(response)
+                    }
+                })
+            })
+        })
+    </script>
+{% endblock %}

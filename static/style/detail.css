@@ -1,0 +1,261 @@
+@import url("./base.css");
+
+.container {
+    padding-left: 35px;
+    padding-right: 35px;
+}
+
+.product-detail {
+    margin-top: 32px;
+    display: flex;
+    gap: 20px;
+}
+
+.wrapper {
+    gap: 30px;
+    width: 80%;
+    background-color: #fff;
+    padding: 20px 16px;
+    border-radius: 5px;
+    margin-bottom: 35px;
+}
+
+.detail {
+    display: flex;
+}
+
+.detail-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background-color: #fff;
+    border: 1px solid #f1f1f1;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.detail-image img {
+    width: 350px;
+}
+
+.product-detail-name {
+    font-size: 20px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 25px;
+    margin-top: 15px;
+}
+
+.features {
+    margin-top: 30px;
+}
+
+.features-title {
+    font-size: 18px;
+}
+
+.features ul {
+    margin-top: 20px;
+    list-style: none;
+}
+
+.features ul li {
+    font-size: 14px;
+    padding: 14px 12px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.product-info {
+    width: 20%;
+    height: fit-content;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    padding: 12px 18px;
+}
+
+.inventory {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+}
+
+.product-price {
+    margin-top: 28px;
+}
+
+.empty {
+    color: #aaa;
+}
+
+.off {
+    text-decoration: line-through;
+    color: #aaa;
+}
+
+.off-price {
+    color: red;
+}
+
+.description-title,
+.comments-title {
+    font-size: 20px;
+    margin-bottom: 25px;
+}
+
+.add-cart {
+    margin-top: 40px;
+}
+
+.add-cart-btn,
+.disactive {
+    padding: 14px 18px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.add-cart-btn {
+    background-color: var(--primary-color);
+}
+
+.disactive {
+    background-color: #ccc;
+}
+
+/* 
+    =============== comments ====================
+*/
+
+.comment-form {
+    margin: 35px 0;
+    padding-bottom: 50px;
+    border-bottom: 1px solid #ccc;
+    background-color: transparent;
+}
+
+.new-comment {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.comment-submit-btn,
+.comment-cancel-submit-btn {
+    width: 120px;
+    padding: 12px 10px;
+    text-align: center;
+    border-radius: 5px;
+    color: #fff;
+    background-color: var(--success-color);
+    border: none;
+    outline: none;
+    font-size: 14px;
+    font-family: 'shabnam-bold';
+    cursor: pointer;
+}
+
+.comment-cancel-submit-btn {
+    background-color: var(--attention-color);
+}
+
+.comment-input {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 12px 14px;
+    resize: vertical;
+}
+
+.comment,
+.reply {
+    border-radius: 10px;
+    padding: 12px 14px;
+}
+
+.comment {
+    background-color: #f4f4f5;
+    margin-bottom: 20px;
+}
+
+.reply {
+    background-color: #e4e4e7;
+    margin-right: 20px;
+    margin-top: 30px;
+}
+
+.comment-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+}
+
+.reply-btn {
+    width: 90px;
+    padding: 8px 0;
+    text-align: center;
+    border-radius: 100px;
+    border: 1px solid var(--primary-color);
+    font-size: 12px;
+    color: var(--primary-color);
+    background-color: transparent;
+    transition: all .2s ease;
+    cursor: pointer;
+}
+
+.reply-btn:hover {
+    color: #fff;
+    background-color: var(--primary-color);
+}
+
+.comment-body {
+    margin-top: 20px;
+}
+
+
+/* 
+    ============= modals ==============
+*/
+
+.modal {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+}
+
+.success-modal,
+.unsuccess-modal {
+    width: 320px;
+    padding: 6px 10px;
+    border-radius: 5px;
+    color: #fff;
+    position: relative;
+    display: none;
+}
+
+.success-modal {
+    background-color: var(--success-color);
+}
+
+.unsuccess-modal {
+    background-color: var(--attention-color);
+}
+
+.close-btn {
+    display: block;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+

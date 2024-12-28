@@ -1,0 +1,52 @@
+{% load static %}
+<footer>
+    <div class="footer">
+        <div class="contact">
+            <div class="phone-wrapper">
+                <p class="phone">تلفن : 021-77445812</p>
+                <p class="email">ایمیل : example@gmail.com</p>
+            </div>
+            <div class="social-media">
+                <p class="social-title">شبکه های اجتماعی</p>
+                <div class="medias">
+                    <a href="#" class="insta">
+                        <img src="{% static 'images/icons/instagram-svgrepo-com.svg' %}" alt="icon">
+                    </a>
+                    <a href="#" class="tel">
+                        <img src="{% static 'images/icons/telegram-svgrepo-com.svg' %}" alt="icon">
+                    </a>
+                    <a href="#" class="youtube">
+                        <img src="{% static 'images/icons/youtube-svgrepo-com.svg' %}" alt="icon"> 
+                    </a>
+                    <a href="#" class="x">
+                        <img src="{% static 'images/icons/twitter-color-svgrepo-com.svg' %}" alt="icon">
+                    </a>
+                </div>
+            </div>
+        </div>
+    
+        <div class="main-footer">
+            <div class="quick-access">
+                <p class="quick-title">دسترسی سریع</p>
+                <ul>
+                    <li><a href="#">تماس با ما</a></li>
+                    <li><a href="#">در باره ما</a></li>
+                    <li><a href="#">سوالات متداول</a></li>
+                    <li><a href="#">بلاگ</a></li>
+                </ul>
+            </div>
+            <div class="categories">
+                <p class="categories-title">دسته بندی ها</p>
+                <ul>
+                    {% for category in categories %}
+                    <li><a href="{% url 'shop:products_list' category.slug %}">{{ category.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        
+        <div class="rights">
+            <p>تمامی حقوق مادی و معنوی این سایت متعلق به <a href="https://github.com/Ho3ein02" target="_blank">Ho3ein02</a> می‌باشد.</p>
+        </div>
+    </div>
+</footer>

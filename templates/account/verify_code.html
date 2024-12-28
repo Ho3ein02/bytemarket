@@ -1,0 +1,106 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style/login.css' %}">
+    <title>Login</title>
+</head>
+<body>
+    <div class="container">
+        <div class="login">
+            <p class="store-name">بایت مارکت</p>
+            <h1 class="title">کد اعتباری</h1>
+            <form class="login-form" method="post">
+                <input type="hidden" name="next" value="{{ next }}">
+                {% csrf_token %}
+                <input type="text" name="verify_code" id="verify_code" placeholder="کد اعتباری" maxlength="6">
+                <div class="errors-wrapper">
+                    {% for message in messages %}
+                    <span class="input-error">{{ message }}</span>
+                    {% endfor %}
+                </div>
+                <div class="detail">
+                    <a href="{% url 'account:verify_phone' %}" class="edit_phone">ویرایش شماره</a>
+                    <div class="opt">
+                        <span class="timer"></span>
+                    </div>
+                </div>
+                <input class="submit-btn" type="submit" value="ورود">
+            </form>
+        </div>
+        <div class="login-image">
+            <img src="{% static 'images/login/istockphoto-1192339276-170667a_LE_auto_x4.jpg' %}" alt="shopping cart">
+        </div>
+    </div>
+
+<div class="popup">
+    <p class="caption">  از اونجایی که این وبسایت حالت دمو داره پس کد رو از اینجا کپی کن! 😊</p>
+    <p class="code">{{ code }}</p>
+    <span class="confirm_btn">👍 حله! </span>
+</div>
+
+<div class="cover"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    document.getElementById('verify_code').addEventListener('keypress', function(event) {
+        const char = String.fromCharCode(event.which);
+        // Allow only digits and a single decimal point
+        if (!/[\d.]/.test(char)) {
+            event.preventDefault();
+        }
+    });
+
+    let countdownTime = 120; // Countdown time in seconds
+    const timerDisplay = document.getElementsByClassName('timer')[0]; // Assume you have an HTML element with id="timer"
+
+    const timer = setInterval(() => {
+        if (countdownTime > 0) {
+            let m = Math.floor(countdownTime / 60);
+            let s = countdownTime % 60;
+
+            m = m < 10 ? '0' + m : m;
+            s = s < 10 ? '0' + s : s;
+            timerDisplay.textContent = m + ':' + s;
+            countdownTime--;
+        } else {
+            clearInterval(timer);
+            timerDisplay.textContent = "00:00";
+            resendElement = document.createElement('a');
+            resendElement.innerHTML = 'ارسال مجدد'
+            resendElement.setAttribute('href', "{% url 'account:resend_code' %}")
+            resendElement.setAttribute('class', 'resend-code')
+            document.getElementsByClassName('opt')[0].append(resendElement)
+        }
+    }, 1000);
+
+    let close_popup_btn = document.querySelector(".confirm_btn");
+    close_popup_btn.addEventListener('click', function () {
+        cover = document.querySelector(".cover");
+        popup = document.querySelector(".popup");
+        cover.style.display = "none";
+        popup.style.display = "none";
+    });
+
+    // $(document).ready(function() {
+    //     $('.login-form').submit(function(e){
+    //         e.preventDefault();
+    //         let code = $('#verify_code').val();
+    //         $.ajax({
+    //             type: 'POST',
+    //             url: '{% url "account:verify_code" %}',
+    //             data: {'csrfmiddlewaretoken': '{{ csrf_token }}', 'verify_code': code},
+    //             success: function(response){
+    //                 let message = response.message;
+    //                 $('.errors-wrapper').empty()
+    //                 $('.errors-wrapper').append(`<span class="input-error">${ message }</span>`)
+    //             }
+    //         });
+    //     })
+    // })
+
+</script>
+</body>
+</html>

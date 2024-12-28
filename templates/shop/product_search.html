@@ -1,0 +1,204 @@
+{% extends 'parent/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block title %} نتایج جستجو | {{ query }} {% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'style/product_list.css' %}">
+{% endblock %}
+
+{% block body %} 
+    <div class="container">
+        <div class="list-wrapper">
+            <div class="sider-filter">
+                <p class="filter-head">فیلتر ها</p>
+                <form method="get" class="filter-form">
+                    <div class="available-filter">
+                        <p>محصولات موجود</p>
+                        <label for="available-input">
+                            <input type="checkbox" name="available" id="available-input">
+                            <span class="available-btn"></span>
+                        </label>
+                    </div>
+                    <div class="price-filter">
+                        <p class="filter-title">فیلتر بر اساس قیمت</p>
+                        <div class="slider-container">
+                            <div class="price-slider">
+                            </div>
+                        </div>
+                        <div class="range-input">
+                            <input type="range" class="min-range" min="0" max="{{ price_max }}" value="0" step="10000">
+                            <input type="range" class="max-range" min="0" max="{{ price_max }}" value="{{ price_max }}" step="10000">
+                        </div>
+                        <div class="price-input">
+                            <div class="price-field">
+                                <span>قیمت از</span>
+                                <div class="price-input-wrapper">
+                                    <input type="text" name="min_price" class="min-input" value="0">
+                                    <span>تومان</span>
+                                </div>
+                            </div>
+                            <div class="price-field">
+                                <span>قیمت تا</span>
+                                <div class="price-input-wrapper">
+                                    <input type="text" name="max_price" class="max-input" value="{{ price_max | intcomma }}">
+                                    <span>تومان</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="brand-filter">
+                        <p class="filter-title">برند</p>
+                        {% for brand in brands %}
+                        <div class="brand-field">
+                            <label for="brand_{{brand.id}}">
+                                <input id="brand_{{brand.id}}" class="brand-input" type="checkbox" name="brand" value="{{ brand.id }}">
+                                <span>{{ brand.name }}</span>
+                            </label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="category-filter">
+                        <p class="filter-title">دسته بندی</p>
+                        {% for category in categories %}
+                        <div class="category-field">
+                            <label for="category_{{category.id}}">
+                                <input id="category_{{category.id}}" class="category-input" type="checkbox" name="category" value="{{ category.id }}">
+                                <span>{{ category.name }}</span>
+                            </label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </form>
+            </div>
+            <div class="left-sider">
+                <div class="products-order">
+                    <p class="products-order-title">ترتیب بر اساس:</p>
+                    <ul class="orders">
+                        <li data-ordering="newest" class="order">جدیدترین</li>
+                        <li data-ordering="price_desc" class="order">بیشترین قیمت</li>
+                        <li data-ordering="price_asc" class="order">کمترین قیمت</li>
+                        <li data-ordering="off_desc" class="order">بیشترین تخفیف</li>
+                    </ul>
+                </div>
+                <div class="all-products-list">
+                    {% if products %}
+                    {% for product in products %}
+                    <div class="product">
+                        <a href="{% url 'shop:product_detail' product.id product.slug %}">
+                            <img class="product-image" src="{{ product.images.first.image_file.url }}" alt="product">
+                        </a>
+                        <a href="{% url 'shop:product_detail' product.id product.slug %}">
+                            <p class="product-caption">{{ product.name }}</p>
+                        </a>
+                        {% if product.inventory %}
+                            <div class="product-price">
+                                {% if product.off_percent != 0 %}
+                                <span class="price off"> {{ product.price | intcomma }} تومان</span>
+                                <span class="price-off">{{ product.new_price | intcomma }} تومان</span>
+                                {% else %}
+                                <span class="price"> {{ product.price | intcomma }} تومان</span>
+                                {% endif %}
+                            </div>
+                            {% if product.off_percent != 0 %}
+                            <span class="off-percent">%{{ product.off_percent }}</span>
+                            {% endif %}
+                        {% else %}
+                        <p class="non-existent">
+                            ناموجود
+                        </p>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <div class='products-empty'>
+                        <p> هیچ محصولی یافت نشد </p>
+                    </div>
+                    {% endif %}
+                </div>
+                {% include 'partials/pagination.html' %}
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{% static 'scripts/product_list.js' %}"></script>
+    <script>
+        function paginationClickHandler(event) {
+            event.preventDefault()
+            $(document).ready(function(){
+                let url = window.location.href + event.target.getAttribute('href').replace('?', '&')
+                let data = {
+                    'available': $('#available-input:checked').val(),
+                    'min_price': $('.min-input').val().replaceAll(',', ''),
+                    'max_input': $('.max-input').val().replaceAll(',', ''),
+                    'brand': $('.brand-input:checked').map( (_, el) => $(el).val() ).get(),
+                    'ordering': $('.order.active').data('ordering')
+                }
+                
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    data: data,
+                    traditional: true,
+                    dataType: 'html',
+                    success: function(response){
+                        $('.pagination').remove();
+                        $('.all-products-list').remove();
+                        $('.left-sider').append(response);
+                    }
+                })
+            })
+        }
+
+        $(document).ready(function(){            
+            function get_data() {
+                let data = {
+                    'available': $('#available-input:checked').val(),
+                    'min_price': $('.min-input').val().replaceAll(',', ''),
+                    'max_input': $('.max-input').val().replaceAll(',', ''),
+                    'brand': $('.brand-input:checked').map( (_, el) => $(el).val() ).get(),
+                    'ordering': $('.order.active').data('ordering'),
+                    'category': $('.category-input:checked').map((_, el) => $(el).val()).get(),
+                }
+                return data
+            }
+            
+            let formFilterElement = document.querySelector('.filter-form')
+            formFilterElement.addEventListener('change', function(e){
+                e.preventDefault()
+                let url = window.location.href;
+                $.ajax({
+                    type: 'GET',
+                    url: url,
+                    data: get_data(),
+                    traditional: true,
+                    dataType: 'html',
+                    success: function(response) {
+                        $('.pagination').remove();
+                        $('.all-products-list').remove();
+                        $('.left-sider').append(response);
+                    }
+                })
+            })
+
+            $('.products-order').on('click', 'li', function(e) {
+                e.preventDefault()
+                $('.order').removeClass('active')
+                $(this).addClass('active')
+                let url = window.location.href
+
+                $.ajax({
+                    type: 'GET',
+                    url: url,
+                    data: get_data(),
+                    traditional: true,
+                    dataType: 'html',
+                    success: function(response) {
+                        $('.pagination').remove();
+                        $('.all-products-list').remove();
+                        $('.left-sider').append(response);
+                    }
+                })
+            })
+        })
+    </script>
+{% endblock %}

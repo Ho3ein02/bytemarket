@@ -1,0 +1,37 @@
+{% load humanize %}
+<div class="all-products-list">
+    {% if products %}
+    {% for product in products %}
+    <div class="product">
+        <a href="{% url 'shop:product_detail' product.id product.slug %}">
+            <img class="product-image" src="{{ product.images.first.image_file.url }}" alt="product">
+        </a>
+        <a href="{% url 'shop:product_detail' product.id product.slug %}">
+            <p class="product-caption">{{ product.name }}</p>
+        </a>
+        {% if product.inventory %}
+            <div class="product-price">
+                {% if product.off_percent != 0 %}
+                <span class="price off"> {{ product.price | intcomma }} تومان</span>
+                <span class="price-off">{{ product.new_price | intcomma }} تومان</span>
+                {% else %}
+                <span class="price"> {{ product.price | intcomma }} تومان</span>
+                {% endif %}
+            </div>
+            {% if product.off_percent != 0 %}
+            <span class="off-percent">%{{ product.off_percent }}</span>
+            {% endif %}
+        {% else %}
+        <p class="non-existent">
+            ناموجود
+        </p>
+        {% endif %}
+    </div>
+    {% endfor %}
+    {% else %}
+    <div class='products-empty'>
+        <p> هیچ محصولی یافت نشد </p>
+    </div>
+    {% endif %}
+</div>
+{% include 'partials/pagination.html' %}

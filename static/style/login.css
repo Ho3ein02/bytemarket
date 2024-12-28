@@ -1,0 +1,172 @@
+@import url("./font.css");
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: 'shabnam';
+    height: 100vh;
+    margin: 0;
+}
+
+.container{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    overflow-y: hidden;
+}
+
+.login{
+    width: 30%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 54px 0;
+}
+
+.store-name{
+    font-family: 'shabnam-bold';
+    font-size: 28px;
+    color: #007bff;
+    margin-bottom: 120px;
+}
+
+.title{
+    font-weight: normal;
+    font-size: 20px;
+    margin-bottom: 32px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input[type='text'] {
+    font-family: 'shabnam';
+    width: 320px;
+    padding: 16px 12px;
+    border-radius: 5px;
+    background-color: #fff;
+    margin-bottom: 8px;
+    outline: none;
+    border: 1px solid #ccc;
+}
+
+.opt {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.resend-code {
+    font-size: 14px;
+    color: #0061e0;
+}
+
+.errors-wrapper {
+    color: #f12e5e;
+    font-size: 12px;
+    align-self: flex-start;
+    margin-bottom: 12px;
+}
+
+.submit-btn {
+    font-family: 'shabnam';
+    font-size: 20px;
+    width: 320px;
+    background-color: #007bff;
+    border: none;
+    outline: none;
+    color: #fff;
+    border-radius: 5px;
+    padding: 12px 8px;
+    margin-top: 180px;
+    cursor: pointer;
+}
+
+.detail {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.edit_phone {
+    color: #0061e0;
+    font-size: 14px;
+}
+
+.timer {
+    font-size: 16px;
+}
+
+.login-image{
+    width: 70%;
+    height: 100%;
+}
+
+.login-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+
+/*
+==================  popup code ======================
+*/
+
+.popup {
+    width: 650px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    padding: 20px 24px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    align-items: center;
+    z-index: 100;
+    position: absolute;
+    top: 30%;
+    right: 30%;
+}
+
+.caption {
+    font-size: 18px;
+}
+
+.code {
+    letter-spacing: 12px;
+    font-size: 22px;
+}
+
+.confirm_btn {
+    background-color: #22c55e;
+    color: #fff;
+    font-size: 18px;
+    padding: 14px 18px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.cover {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    right: 0;
+    z-index: 99;
+    background-color: rgba(0, 0, 0, 0.5);
+}
