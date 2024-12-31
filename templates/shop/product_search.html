@@ -152,7 +152,7 @@
                 let data = {
                     'available': $('#available-input:checked').val(),
                     'min_price': $('.min-input').val().replaceAll(',', ''),
-                    'max_input': $('.max-input').val().replaceAll(',', ''),
+                    'max_price': $('.max-input').val().replaceAll(',', ''),
                     'brand': $('.brand-input:checked').map( (_, el) => $(el).val() ).get(),
                     'ordering': $('.order.active').data('ordering')
                 }
