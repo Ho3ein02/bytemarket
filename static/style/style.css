@@ -754,7 +754,9 @@ header {
     .mobile-header {
         display: block;
     }
-
+    .nav-menu {
+        width: 15rem;
+    }
 }
 
 @media (max-width: 415px) {

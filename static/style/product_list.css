@@ -257,7 +257,7 @@ input[type="range"]::-webkit-slider-thumb {
     display: none;
 }
 
-.filter-mobile {
+/* .filter-mobile {
     width: 20rem;
     position: fixed;
     top: 0;
@@ -269,7 +269,7 @@ input[type="range"]::-webkit-slider-thumb {
     transition: all ease 0.4s;
     z-index: 1000;
     overflow: auto;
-}
+} */
 
 .close-wrapper {
     position: relative;
@@ -281,9 +281,9 @@ input[type="range"]::-webkit-slider-thumb {
     cursor: pointer;
 }
 
-.filter-mobile * {
+/* .filter-mobile * {
     font-size: 14px;
-}
+} */
 
 .filter-buttons {
     display: flex;
@@ -427,8 +427,9 @@ input[type="range"]::-webkit-slider-thumb {
         gap: 5px;
         justify-content: center;
     }
-    .filter-mobile {
-        width: 16rem;
+    .sider-filter {
+        width: 15rem;
+        height: auto;
     }
 }
 
