@@ -40,6 +40,17 @@
                 {% endfor %}
                 </tbody>
             </table>
+            <div class="user-order-products">
+                {% for item in cart %}
+                <div class="user-order-product">
+                    <p class="user-order-product-title">{{ item.product.name }}</p>
+                    <div class="user-order-product-detail">
+                        <p class="user-order-product-quantity">تعداد : {{ item.quantity }}</p>
+                        <p class="user-order-product-price">قیمت : {{ item.price | intcomma }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
             <div class="result">
             <p class="post-price">هزینه پست : {{ cart.post_price | intcomma }} تومان</p>
             <p class="payment-price">مبلغ کل : {{ cart.final_total_price | intcomma }} تومان</p>

@@ -98,3 +98,38 @@
 .orders-table td{
     padding: 10px 30px;
 }
+
+
+/* 
+    ============ media queries =============
+*/
+
+@media (max-width: 768px) {
+    * {
+        font-size: 12px;
+    }
+    .orders-table th, .orders-table td {
+        padding: 5px 20px;
+    }
+}
+
+@media (max-width: 640px) {
+    .logout-btn, .edit {
+        width: 100px;
+        padding: 6px 0;
+        font-size: 12px;
+    }
+    .order-date,
+    .order-total-price {
+        display: none;
+    }
+    .orders-table th, .orders-table td {
+        padding: 5px 10px;
+        font-size: 10px;
+    }
+    .input-wrapper,
+    .user-info-detail form input {
+        width: 100%;
+    }
+}
+

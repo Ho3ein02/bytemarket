@@ -1,7 +1,8 @@
 {% load humanize %}
-<header>
-    <div class="header-top">
 
+<!-- header for desktop -->
+<header class="desktop-header">
+    <div class="header-top">
         <!--   search bar     -->
         <form action="{% url 'shop:product_search' %}" class="search-container" method="get">
             <input class="search-input" type="text" placeholder="جستجوی محصولات" name="query">
@@ -12,7 +13,7 @@
             </a>
         </form>
 
-        <!--    login and cart    -->
+        <!--    login and cart desktop wrapper   -->
         <div class="profile-wrapper">
             {% if request.user.is_authenticated %}
                 <a href="{% url 'account:profile' %}" class="profile align-center">
@@ -34,8 +35,8 @@
                 <span class="cart-total-count align-center">{{ cart_count }}</span>
             </a>
         </div>
-    </div>
 
+    </div>
     <!--  menu  -->
     <nav class="navbar">
         <div class="category-dropdown">
@@ -57,4 +58,66 @@
             <li><a href="#">تماس با ما</a></li>
         </ul>
     </nav>
+</header>
+
+<!-- header for mobile -->
+<header class="mobile-header">
+    <!--    login and cart mobile  -->
+    <div class="header-top">
+        <a href="{% url 'cart:cart' %}" class="cart align-center">
+            <svg class="icon" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+            </svg>
+            <span class="cart-total-price">{{ cart_total_price | intcomma}} تومان</span>
+            <span class="cart-total-count align-center">{{ cart_count }}</span>
+        </a>
+        <div class="profile-wrapper-mobile">
+            <form action="{% url 'shop:product_search' %}" class="search-container" method="get">
+                <input class="search-input" type="text" placeholder="جستجوی محصولات" name="query">
+                <a href="{% url 'shop:product_search' %}" class="search-button align-center">
+                    <svg class="search-icon icon" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                    </svg>
+                </a>
+            </form>
+            <div class="menu-icon">
+                <span class="menu-icon__line"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- mobile menu -->
+    <div class="nav-menu">
+        <ul class="mobile-menu">
+            <li class="mobile-menu__item">
+                <a href="{% url 'shop:index' %}" class="mobile-menu__link">صفحه اصلی</a>
+            </li>
+            <li class="mobile-menu__item">
+                <a href="#" class="mobile-menu__link">درباره ما</a>
+            </li>
+            <li class="mobile-menu__item">
+                <a href="#" class="mobile-menu__link">تماس با ما</a>
+            </li>
+        </ul>
+        <div>
+            <p class="category-mobile-title">دسته بندی ها</p>
+            <ul class="category-mobile">
+                {% for category in header_categories %}
+                <li class="mobile-menu__item"><a href="{% url 'shop:products_list' category.slug %}" class="mobile-menu__link">{{ category.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% if request.user.is_authenticated %}
+            <a href="{% url 'account:profile' %}" class="profile align-center">
+                <svg class="icon" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                </svg>
+                <span class="profile-text">پروفایل</span>
+            </a>
+        {% else %}
+            <a class="profile align-center" href="{% url 'account:verify_phone' %}">
+                <span class="profile-text">ورود / ثبت نام</span>
+            </a>
+        {% endif %}
+    </div>
 </header>

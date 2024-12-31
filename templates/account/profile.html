@@ -35,16 +35,16 @@
                 <table class="orders-table">
                     <tr>
                         <th>شماره سفارش</th>
-                        <th>تاریخ</th>
-                        <th>مجموع</th>
+                        <th class="order-date">تاریخ</th>
+                        <th class="order-total-price">مجموع</th>
                         <th>وضعیت</th>
                         <th>جزئیات</th>
                     </tr>
                     {% for order in user.orders.all %}
                         <tr>
                             <td>{{ order.id }}</td>
-                            <td>{{ order.created | jformat:"%Y/%m/%d" }}</td>
-                            <td>{{ order.final_price | intcomma}} تومان</td>
+                            <td class="order-date">{{ order.created | jformat:"%Y/%m/%d" }}</td>
+                            <td class="order-total-price">{{ order.final_price | intcomma}} تومان</td>
                             {% if order.is_paid %}
                                 <td>پرداخت شده</td>
                             {% else %}

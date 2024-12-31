@@ -50,17 +50,23 @@
                     <div class="input-wrapper">
                         <label for="province">استان :</label>
                         <select name="province" id="province" class="select">
-                            <option value="None">استان خود را انتخاب کنید:</option>
+                            <option value="">استان خود را انتخاب کنید:</option>
                             {% for province in provinces %}
-                            <option value="{{province.name}}">{{province.name}}</option>
+                            <option value="{{province.id}}">{{province.name}}</option>
                             {% endfor %}
                         </select>
+                        {% for error in form.province.errors %}
+                            <span class="input-error">{{ error }}</span>
+                        {% endfor %}
                     </div>
                     <div class="input-wrapper">
                         <label for="city">شهر :</label>
                         <select name="city" id="city" class="select">
-                            <option value="None">شهر خود را انتخاب کنید.</option>
+                            <option value="">شهر خود را انتخاب کنید.</option>
                         </select>
+                        {% for error in form.city.errors %}
+                            <span class="input-error">{{ error }}</span>
+                        {% endfor %}
                     </div>
                     
                 </div>

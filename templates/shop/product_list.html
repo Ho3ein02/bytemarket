@@ -10,6 +10,9 @@
     <div class="container">
         <div class="list-wrapper">
             <div class="sider-filter">
+                <div class="close-wrapper">
+                    <div class="close-btn">X</div>
+                </div>
                 <p class="filter-head">فیلتر ها</p>
                 <form method="get" class="filter-form">
                     <div class="available-filter">
@@ -60,6 +63,25 @@
                 </form>
             </div>
             <div class="left-sider">
+                <div class="mobile-filter-wrapper">
+                    <div class="filter-buttons">
+                        <p class="filter-toggle">فیلتر</p>
+                        <div class="mobile-ordering">
+                            <div class="ordering-toggle">
+                                <p class="current-ordering">جدید ترین</p>
+                                <svg class="chevron-icon" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                </svg>                                  
+                            </div>
+                            <ul class="mobile-orders">
+                                <li data-ordering="newest" class="order active">جدیدترین</li>
+                                <li data-ordering="price_desc" class="order">بیشترین قیمت</li>
+                                <li data-ordering="price_asc" class="order">کمترین قیمت</li>
+                                <li data-ordering="off_desc" class="order">بیشترین تخفیف</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
                 <div class="products-order">
                     <p class="products-order-title">ترتیب بر اساس:</p>
                     <ul class="orders">
@@ -108,6 +130,7 @@
             </div>
         </div>
     </div>
+    <div class="cover"></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{% static 'scripts/product_list.js' %}"></script>
     <script>
@@ -143,7 +166,7 @@
                 let data = {
                     'available': $('#available-input:checked').val(),
                     'min_price': $('.min-input').val().replaceAll(',', ''),
-                    'max_input': $('.max-input').val().replaceAll(',', ''),
+                    'max_price': $('.max-input').val().replaceAll(',', ''),
                     'brand': $('.brand-input:checked').map( (_, el) => $(el).val() ).get(),
                     'ordering': $('.order.active').data('ordering')
                 }
@@ -169,11 +192,8 @@
                     }
                 })
             })
-            
-            $('.products-order').on('click', 'li', function(e) {
-                e.preventDefault()
-                $('.order').removeClass('active')
-                $(this).addClass('active')
+
+            function order_ajax() {
                 let url = window.location.href
 
                 $.ajax({
@@ -188,6 +208,20 @@
                         $('.left-sider').append(response);
                     }
                 })
+            }
+            
+            $('.products-order').on('click', 'li', function(e) {
+                e.preventDefault()
+                $('.order').removeClass('active')
+                $(this).addClass('active')
+                order_ajax()
+            })
+
+            $('.mobile-orders').on('click', 'li', function(e) {
+                e.preventDefault()
+                $('.order').removeClass('active')
+                $(this).addClass('active')
+                order_ajax()
             })
         })
     </script>

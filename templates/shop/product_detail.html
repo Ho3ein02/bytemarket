@@ -72,9 +72,9 @@
                 <div class="comment" data-parent="{{comment.id}}">
                     <div class="comment-header">
                         {% if comment.user.has_full_name %}
-                        <div class="comment-user"> {{ comment.user.get_full_name }}  ( {{comment.created | jformat:"%Y/%m/%d" }} ) </div>
+                        <div class="comment-user"> {{ comment.user.get_full_name }} <span class="date">( {{comment.created | jformat:"%Y/%m/%d" }} )</span>  </div>
                         {% else %}
-                        <div class="comment-user"> کاربر ناشناس ( {{comment.created | jformat:"%Y/%m/%d" }} ) </div>
+                        <div class="comment-user"> کاربر ناشناس <span class="date">( {{comment.created | jformat:"%Y/%m/%d" }} )</span> </div>
                         {% endif %}
                         <p class="reply-btn">پاسخ</p>
                     </div>

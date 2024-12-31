@@ -114,6 +114,33 @@ textarea {
     padding: 15px 10px;
 }
 
+.user-order-products {
+    display: none;
+}
+
+.user-order-product {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+}
+
+.user-order-product-title {
+    font-size: 14px;
+}
+
+.user-order-product-detail {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+    margin-top: 15px;
+}
+
+.user-order-product-quantity,
+.user-order-product-price {
+    font-size: 14px;
+}
+
 
 .result {
     border-top: 1px solid #ccc;
@@ -210,3 +237,61 @@ textarea {
     font-size: 16px;
     margin-bottom: 35px;
 }
+
+
+
+/* 
+    ============ media queries =============
+*/
+
+@media (max-width: 1024px) {
+    .info-wrapper {
+        gap: 10px;
+    }
+    .input-wrapper * {
+        font-size: 14px;
+    }
+    .payment-price, .post-price {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 768px) {
+    #keywords tbody tr td {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 640px) {
+    #keywords {
+        display: none;
+    }
+    .user-order-products {
+        display: block;
+    }
+    .info-wrapper {
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+    form,
+    input,
+    select {
+        width: 100%;
+    }
+    .result {
+        border-top: none;
+        padding-top: 0;
+    }
+    .row {
+        display: none;
+    }
+    .product-item {
+        flex-direction: column;
+    }
+    .product-item-image {
+        display: block;
+        margin: 0 auto;
+    }
+}
+
+

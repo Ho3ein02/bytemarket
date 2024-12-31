@@ -5,7 +5,7 @@ from .models import Order
 class OrderCreateForm(forms.ModelForm):
     class Meta:
         model = Order
-        fields = ['phone', 'first_name', 'last_name', 'postal_code', 'address']
+        fields = ['phone', 'first_name', 'last_name', 'postal_code', 'address', 'province', 'city']
 
     def clean_phone(self):
         phone = self.cleaned_data['phone']
@@ -28,3 +28,17 @@ class OrderCreateForm(forms.ModelForm):
             raise forms.ValidationError('کد پستی فقط شامل عدد می تواند باشد.')
         
         return postal_code
+    
+    def clean_province(self):
+        province = self.cleaned_data['province']
+        
+        if not province:
+            raise forms.ValidationError('این فیلد نمی تواند خالی باشد')
+        return province
+    
+    def clean_city(self):
+        city = self.cleaned_data['city']
+        
+        if not city:
+            raise forms.ValidationError('این فیلد نمی تواند خالی باشد')
+        return city

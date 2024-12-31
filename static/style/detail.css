@@ -259,3 +259,115 @@
     cursor: pointer;
 }
 
+
+/* 
+    ============ media queries =============
+*/
+
+@media (max-width: 1280px) {
+    .detail-image {
+        height: 60%;
+    }
+    .detail-image img {
+        width: 220px;
+    }
+    .product-detail-name,
+    .features-title {
+        font-size: 16px;
+    }
+    .wrapper {
+        width: 75%;
+    }
+    .product-detail {
+        gap: 10px;
+    }
+    .product-info {
+        width: auto;
+    }
+}
+
+@media (max-width: 1024px) {
+    .product-detail {
+        flex-direction: column;
+    }
+    .wrapper {
+        width: 100%;
+    }
+    .add-cart-btn {
+        width: auto;
+    }
+    .inventory {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+    .product-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+    }
+}
+
+@media (max-width: 768px) {
+    .features * {
+        font-size: 14px;
+    }
+    .wrapper *,
+    .product-info * {
+        font-size: 14px;
+    }
+    .add-cart-btn {
+        padding: 10px 14px;
+    }
+    .comment-submit-btn,
+    .comment-cancel-submit-btn {
+        width: 100px;
+        padding: 10px 8px;
+        font-size: 12px;
+    }
+    .reply-btn {
+        width: 80px;
+        padding: 6px 0;
+        font-size: 12px;
+    }
+}
+
+
+@media (max-width: 640px) {
+    .detail-image img {
+        width: 160px;
+    }
+    .detail {
+        flex-direction: column;
+    }
+    .add-cart-btn {
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+    .wrapper *,
+    .features ul li {
+        font-size: 12px;
+    }
+    .product-info {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: 15px;
+    }
+    .comment-submit-btn,
+    .comment-cancel-submit-btn {
+        width: 70px;
+        padding: 6px 4px;
+        font-size: 10px;
+        font-family: 'shabnam';
+    }
+    .reply-btn {
+        width: 60px;
+        padding: 2px 0;
+        font-size: 10px;
+    }
+    .comment-user {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+}

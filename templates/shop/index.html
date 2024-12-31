@@ -75,56 +75,110 @@
     import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs'
 
     var swiper = new Swiper(".banner_swiper", {
-    spaceBetween: 30,
-    centeredSlides: true,
-    autoplay: {
-        delay: 2500,
-        disableOnInteraction: false,
-    },
-    pagination: {
-        el: ".swiper-pagination",
-        clickable: true,
-    },
-    navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-    },
+        spaceBetween: 30,
+        centeredSlides: true,
+        autoplay: {
+            delay: 2500,
+            disableOnInteraction: false,
+        },
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
     });
     var seggustion_swiper = new Swiper(".seggestion_swiper", {
-    slidesPerView: 5,
-    spaceBetween: 30,
-    pagination: {
-        el: ".swiper-pagination",
-        clickable: true,
-    },
-    navigation: {
-        nextEl: ".swiper-button-next-custom",
-        prevEl: ".swiper-button-prev-custom",
-    },
+        slidesPerView: 2,
+        spaceBetween: 5,
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        navigation: {
+            nextEl: ".swiper-button-next-custom",
+            prevEl: ".swiper-button-prev-custom",
+        },
+        breakpoints: {
+            640: {
+                slidesPerView: 3,
+                spaceBetween: 5,
+            },
+            768: {
+                slidesPerView: 3,
+                spaceBetween: 30,
+            },
+            1024: {
+                slidesPerView: 4,
+                spaceBetween: 10,
+            },
+            1400: {
+                slidesPerView: 5,
+                spaceBetween: 30,
+            }
+        }
     });
     var best_seller_swiper = new Swiper(".best_seller_swiper", {
-    slidesPerView: 5,
-    spaceBetween: 30,
-    pagination: {
-        el: ".swiper-pagination",
-        clickable: true,
-    },
-    navigation: {
-        nextEl: ".swiper-button-next-best-seller",
-        prevEl: ".swiper-button-prev-best-seller",
-    },
+        slidesPerView: 2,
+        spaceBetween: 5,
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        navigation: {
+            nextEl: ".swiper-button-next-best-seller",
+            prevEl: ".swiper-button-prev-best-seller",
+        },
+        breakpoints: {
+            640: {
+                slidesPerView: 3,
+                spaceBetween: 5,
+            },
+            768: {
+                slidesPerView: 3,
+                spaceBetween: 30,
+            },
+            1024: {
+                slidesPerView: 4,
+                spaceBetween: 10,
+            },
+            1400: {
+                slidesPerView: 5,
+                spaceBetween: 30,
+            }
+        }
     });
     var newest_seller = new Swiper(".newest_swiper", {
-    slidesPerView: 5,
-    spaceBetween: 30,
-    pagination: {
-        el: ".swiper-pagination",
-        clickable: true,
-    },
-    navigation: {
-        nextEl: ".swiper-button-next-newest",
-        prevEl: ".swiper-button-prev-newest",
-    },
+        slidesPerView: 2,
+        spaceBetween: 5,
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        navigation: {
+            nextEl: ".swiper-button-next-newest",
+            prevEl: ".swiper-button-prev-newest",
+        },
+        breakpoints: {
+            640: {
+                slidesPerView: 3,
+                spaceBetween: 5,
+            },
+            768: {
+                slidesPerView: 3,
+                spaceBetween: 30,
+            },
+            1024: {
+                slidesPerView: 4,
+                spaceBetween: 10,
+            },
+            1400: {
+                slidesPerView: 5,
+                spaceBetween: 30,
+            }
+        }
     });
 </script>
 {% endblock %}

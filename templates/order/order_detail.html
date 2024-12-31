@@ -20,6 +20,7 @@
                     {% else %}
                     <p class="order-status"> وضعیت : <span class="re">پرداخت نشده</span> </p>
                     {% endif %}
+                    <p class="order-date">تاریخ : {{ order.created | jformat:"%Y/%m/%d" }}</p>
                 </div>
                 {% for item in order.items.all %}
                 <div class="product-item">
@@ -28,7 +29,7 @@
                     <div class="product-item-detail">
                         <a href="{% url 'shop:product_detail' item.product.id item.product.slug %}" class="product-item-name">{{ item.product.name }}</a>
                         <div class="detail-price">
-                            <p class="item-product-price">قیمت : {{ item.price }}</p>
+                            <p class="item-product-price">قیمت : {{ item.price | intcomma }}</p>
                             <p class="item-product-quantity">تعداد : {{ item.quantity }}</p>
                         </div>
                     </div>

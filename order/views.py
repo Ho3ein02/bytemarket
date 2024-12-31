@@ -14,13 +14,13 @@ def order_create(request):
             form = OrderCreateForm(request.POST)
             
             # Get province and city names from request
-            province_name = request.POST.get('province')
-            city_name = request.POST.get('city')
+            province_id = request.POST.get('province')
+            city_id = request.POST.get('city')
             if form.is_valid():
                 order = form.save(commit=False)
                 order.user = user
-                order.province = Province.objects.get(name=province_name)
-                order.city = City.objects.get(name=city_name)
+                order.province = Province.objects.get(id=province_id)
+                order.city = City.objects.get(id=city_id)
                 order.save()
                 
                 # Create order item from cart products
@@ -60,12 +60,12 @@ def order_edit(request, order_id):
     order = Order.objects.get(id=order_id)
     if request.method == 'POST':
         form = OrderCreateForm(request.POST, instance=order)
-        province_name = request.POST.get('province')
-        city_name = request.POST.get('city')
+        province_id = request.POST.get('province')
+        city_id = request.POST.get('city')
         if form.is_valid():
             order = form.save(commit=False)
-            order.province = Province.objects.get(name=province_name)
-            order.city = City.objects.get(name=city_name)
+            order.province = Province.objects.get(id=province_id)
+            order.city = City.objects.get(id=city_id)
             order.save()
             return redirect('order:confirm_order', order_id=order_id)
     else:
@@ -86,5 +86,5 @@ def get_cities(request):
     """Return cities of a specified province"""
     province = request.GET.get('province')
     if province:
-        cities = Province.objects.get(name=province).cities.all()
+        cities = Province.objects.get(id=province).cities.all()
         return render(request, 'order/city_ajax.html', {'cities': cities})

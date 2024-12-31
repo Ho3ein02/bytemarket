@@ -1,13 +1,4 @@
 
-// -------------- available filter -----------------
-// let availableBtnElement = document.querySelector('.available-btn')
-// let availableInputElement = document.querySelector('.available-input')
-// availableBtnElement.addEventListener('click', function() {
-//     availableBtnElement.classList.toggle('active')
-// })
-
-
-
 // ------------- price range filter -----------------
 const rangevalue = document.querySelector(".slider-container .price-slider");
 const rangeInputvalue = document.querySelectorAll(".range-input input");
@@ -97,4 +88,37 @@ for (let i = 0; i < priceInputvalue.length; i++) {
     }
 }
 
+// ------------- filter toggle -----------------
 
+const filterToggle = document.querySelector(".filter-toggle");
+const mobileFilter = document.querySelector(".sider-filter");
+const closeFilterBtn = document.querySelector(".close-btn");
+const cover = document.querySelector(".cover");
+
+filterToggle.addEventListener("click", () => {
+    mobileFilter.classList.add("filter-mobile--open");
+    cover.classList.add("cover--show");
+});
+
+closeFilterBtn.addEventListener("click", () => {
+    mobileFilter.classList.remove("filter-mobile--open");
+    cover.classList.remove("cover--show");
+})
+
+// ------------- mobile ordering -----------------
+
+const currentOrdering = document.querySelector(".current-ordering");
+const mobileOrderList = document.querySelector(".mobile-orders");
+const orderingToggle = document.querySelector(".ordering-toggle");
+const orderItems = document.querySelectorAll(".order");
+
+orderingToggle.addEventListener("click", () => {
+    mobileOrderList.classList.toggle("mobile-orders--show");
+});
+
+orderItems.forEach(order => {
+    order.addEventListener("click", () => {
+        currentOrdering.innerHTML = order.innerHTML;
+        mobileOrderList.classList.remove("mobile-orders--show");
+    });
+});
