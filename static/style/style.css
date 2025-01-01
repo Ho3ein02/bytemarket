@@ -95,6 +95,7 @@ header {
     border-radius: 50px;
     background-color: var(--primary-color);
     color: #fff;
+    -webkit-tap-highlight-color: #fff;
     position: absolute;
     top: 0;
     right: 0;
@@ -553,6 +554,12 @@ header {
     margin-top: 75px;
 }
 
+.footer .categories a,
+.footer .quick-access a {
+    -webkit-tap-highlight-color: #fff;
+    color: #fff;
+}
+
 .contact {
     display: flex;
     align-items: center;
@@ -615,6 +622,10 @@ header {
     font-size: 14px;
     width: 100%;
     text-align: center;
+}
+
+.rights a {
+    color: #fff;
 }
 
 /* 

@@ -21,6 +21,11 @@ a {
     line-height: 1.5;
 }
 
+a {
+    text-decoration: none;
+    color: var(--text-color);
+}
+
 body {
     background-color: #f3f4f6;
     margin: 0;
