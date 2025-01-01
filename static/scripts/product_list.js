@@ -105,6 +105,11 @@ closeFilterBtn.addEventListener("click", () => {
     cover.classList.remove("cover--show");
 })
 
+cover.addEventListener('click', () => {
+    mobileFilter.classList.remove("filter-mobile--open");
+    cover.classList.remove("cover--show");
+})
+
 // ------------- mobile ordering -----------------
 
 const currentOrdering = document.querySelector(".current-ordering");
