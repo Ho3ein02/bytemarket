@@ -20,6 +20,7 @@
 a {
     -webkit-text-fill-color: var(--text-color);
     -webkit-tap-highlight-color: var(--text-color);
+    text-decoration: none;
 }
 
 body {
