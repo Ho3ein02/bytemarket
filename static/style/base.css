@@ -8,10 +8,6 @@
     --success-color: #22c55e;
 }
 
-a {
-    -webkit-text-fill-color: var(--text-color);
-}
-
 *{
     padding: 0;
     margin: 0;
