@@ -625,7 +625,7 @@ header {
 }
 
 .rights a {
-    -webkit-tap-highlight-color: #fff;
+    color: #fff;
 }
 
 /* 
