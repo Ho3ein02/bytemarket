@@ -17,6 +17,10 @@
     line-height: 1.5;
 }
 
+a {
+    -webkit-text-fill-color: var(--text-color);
+}
+
 body {
     background-color: #f3f4f6;
     margin: 0;
